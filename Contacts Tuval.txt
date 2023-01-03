@@ -1,0 +1,184 @@
+import { Integer } from "@tuval/core";
+import {
+    bindState,
+    cTop,
+    ForEach,
+    hslToRgb,
+    HStack,
+    Icon,
+    IconLibrary,
+    ScrollView,
+    State,
+    Text,
+    TextField,
+    TForm,
+    UIButton,
+    UIController,
+    UIScene,
+    VStack,
+} from "@tuval/forms";
+
+interface contact {
+    text1: string,
+    text2: string;
+}
+
+
+
+
+export class AppController extends UIController {
+    @State()
+    private menu_text: string;
+    @State()
+    private contactItem: contact = {
+        text1: "",
+        text2: ""
+    }
+
+    @State()
+    private contactList: contact[] = [];
+
+    protected BindRouterParams() {
+        const contacts = localStorage.getItem("contacts")
+        if (!contacts) {
+            localStorage.setItem("contacts", JSON.stringify([]))
+        }
+        else {
+            this.contactList = JSON.parse(localStorage.getItem("contacts"))
+        }
+    }
+
+    protected InitController() {
+        this.menu_text = "About";
+    }
+
+    public OnBindModel(form: TForm) { }
+
+    private getLocalStorage() {
+        this.contactList = []
+        this.contactList = JSON.parse(localStorage.getItem("contacts"))
+    }
+
+    private setItemToLocalStorage() {
+        this.contactList.push(this.contactItem)
+        localStorage.setItem("contacts", JSON.stringify(this.contactList))
+        this.contactItem.text1 = ""
+        this.contactItem.text2 = ""
+        this.getLocalStorage()
+    }
+    private deleteItemLocalStorage(index: number) {
+        this.contactList.splice(index, 1)
+        localStorage.setItem("contacts", JSON.stringify(this.contactList))
+        this.getLocalStorage()
+    }
+    private editContactItemToLocalStorage() {
+        localStorage.setItem("contacts", JSON.stringify(this.contactList))
+        this.getLocalStorage()
+    }
+
+
+    public LoadView() {
+
+        const [selectedIndex, setSelectedIndex] = bindState(-1)
+        return (
+            VStack({ alignment: cTop })(
+                VStack(
+                    HStack({ spacing: 25 })(
+                        Icon("\\e7fd")
+                            .foregroundColor({ default: "#6360ff" })
+                            .size(30),
+                        TextField()
+                            .value(this.contactItem.text1)
+                            .placeholder("Person Name")
+                            .onTextChange((value) => this.contactItem.text1 = value),
+                        Icon("\\e0cf")
+                            .foregroundColor({ default: "#6360ff" })
+                            .size(30),
+                        TextField()
+                            .value(this.contactItem.text2)
+                            .placeholder("Phone Number")
+                            .onTextChange((value) => this.contactItem.text2 = value),
+                        UIButton(Text("Save").foregroundColor("#f1f1fa"))
+                            .background("#6360ff")
+                            .width(140)
+                            .height(35)
+                            .cornerRadius(10)
+                            .padding(10)
+                            .onClick(() => {
+                                this.setItemToLocalStorage()
+                            }
+                            )
+                    )
+                        .width(600)
+                        .height()
+                        .borderBottom("1 px white")
+                        .padding(5)
+                )
+                    .backgroundColor("#f1f1fa")
+                    .height(100),
+                ScrollView({ axes: "cVertical" })(
+                    VStack({ alignment: cTop, spacing: 10 })(
+                        Text("Contact List").foregroundColor("white"),
+                        ...ForEach(this.contactList)((item, index) =>
+                            selectedIndex == index ?
+                                HStack({ spacing: 15 })(
+                                    TextField()
+                                        .value(this.contactList[index].text1).width()
+                                        .onTextChange((value) => {
+                                            this.contactList[index].text1 = value
+                                        }),
+                                    TextField()
+                                        .value(this.contactList[index].text2).width()
+                                        .onTextChange((value) => {
+                                            this.contactList[index].text2 = value
+                                        }),
+                                    UIButton(
+                                        Text("Save Change")
+                                            .width()
+                                            .height(20)
+                                            .cornerRadius(5)
+                                            .padding(10)
+                                            .foregroundColor("#7c7afc")
+                                            .backgroundColor("#f1f1fa")
+                                    ).onClick(() => {
+                                        setSelectedIndex(-1),
+                                            this.editContactItemToLocalStorage()
+
+                                    })
+                                )
+
+                                :
+                                HStack({ spacing: 35 })(
+                                    Text(item.text1).foregroundColor("#f1f1fa"),
+                                    Text(item.text2).foregroundColor("#f1f1fa").marginLeft("50px"),
+                                    UIButton(Text("Edit").foregroundColor("#7c7afc"))
+                                        .backgroundColor("#f1f1fa")
+                                        .width(50)
+                                        .height(20)
+                                        .cornerRadius(5)
+                                        .padding(10)
+                                        .onClick(() => {
+                                            setSelectedIndex(index)
+                                        }),
+
+                                    UIButton(Text("Delete").foregroundColor("#7c7afc"))
+                                        .backgroundColor("#f1f1fa")
+                                        .width(50)
+                                        .height(20)
+                                        .cornerRadius(5)
+                                        .padding(10)
+                                        .onClick(() => {
+                                            this.deleteItemLocalStorage(index)
+                                        })
+                                ).borderBottom("1px solid white")
+                        )
+                    )
+                        .height()
+                        .width(1100)
+                        .backgroundColor("#7c7afc")
+                )
+            ).backgroundColor("#f1f1fa")
+                .padding(30)
+        )
+    }
+}

@@ -1,0 +1,63 @@
+return (
+    VStack({spacing: 20})(
+        HStack({alignment:cLeading})(
+            Text("LIBRARY").foregroundColor("gray").marginLeft("15px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon(IconLibrary.Dashboard1).size("25").foregroundColor("white").marginLeft("1px"),
+                Text("All courses").foregroundColor("White").marginLeft("10px")
+            ).height("40px").background(Color.black).width("130px").borderBottom("1px solid gray")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            Text("MY LEARNING").foregroundColor("gray").marginLeft("15px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon("\\e04a").size("25").foregroundColor("white"),
+                Text("My courses").foregroundColor("white").marginLeft("10px")
+            ).height("40px").background(Color.black).width("130px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon("\\e241").size("25").foregroundColor("white"),
+                Text("My List").foregroundColor("white").marginLeft("10px")
+            ).height("40px").background(Color.black).width("110px").borderBottom("1px solid gray")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            Text("INSTRUCTOR").foregroundColor("gray").marginLeft("15px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon("\\f06a").size("25").foregroundColor("white"),
+                Text("Courses").foregroundColor("white").marginLeft("10px")
+            ).height("40px").background(Color.black).width("110px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon("\\e0bf").size("25").foregroundColor("white"),
+                Text("Communication").foregroundColor("white").marginLeft("10px")
+            ).height("40px").background(Color.black).width("155px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon("\\e01d").size("25").foregroundColor("white"),
+                Text("Performance").foregroundColor("white").marginLeft("10px")
+            ).height("40px").background(Color.black).width("130px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon("\\e869").size("25").foregroundColor("white"),
+                Text("Tools").foregroundColor("white").marginLeft("10px")
+            ).height("40px").background(Color.black).width("90px")
+        ).height(30),
+        HStack({alignment:cLeading})(
+            UIButton(
+                Icon("\\f233").size("25").foregroundColor("white"),
+                Text("Resources").foregroundColor("white").marginLeft("10px")
+            ).height("40px").background(Color.black).width("120px").borderBottom("1px solid gray")
+        ).height(30),
+
+    ).background(Color.black)
+)
+

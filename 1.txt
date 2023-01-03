@@ -1,0 +1,28 @@
+return(
+    HStack({spacing:47})(
+        HStack({alignment:cLeading,spacing:10})(
+            Icon(IconLibrary.Dashboard1).size("50").foregroundColor("gray").width(70),
+            Text("Dashboard").width().height(40).fontWeight(700)
+        ).height(),
+        VStack({spacing:10})(
+            Text("NOTIFICATIONS").width().height(40).fontWeight(700),
+            Text("0").height(40).fontSize(40)
+        ).height(),
+        VStack({spacing:10})(
+            Text("PAGE VIEWS").width().height(40).fontWeight(700),
+            Text("0").height(40).fontSize(40)
+        ).height(),
+        VStack({spacing:10})(
+            Text("ERRORS").width().height(40).fontWeight(700),
+            Text("0").height(40).fontSize(40)
+        ).height(),
+        VStack({spacing:10})(
+            Text("USER IMPECTED").width().height(40).fontWeight(700),
+            Text("0").height(40).fontSize(40)
+        ).height(),
+        VStack({spacing:10})(
+            Text("SAMPLING").width().height(40).fontWeight(700),
+            Text("0").height(40).fontSize(40)
+        ).height(),
+    ).width().height()
+).background(Color.white)

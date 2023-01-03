@@ -1,0 +1,39 @@
+return (
+    HStack(
+        VStack({ alignment: cLeading })(
+            VStack({ alignment: cLeading })(
+                Text("COURSE").foregroundColor("gray").fontWeight(500).marginLeft("20px")
+            ).width().height().marginBottom("10px").marginTop("5px"),
+            VStack({ alignment: cLeading })(
+                Text("JavaScript").foregroundColor("white").fontWeight(500).fontSize(20).marginLeft("20px"),
+                Text("Fundamentals").foregroundColor("white").fontWeight(500).fontSize(20).marginLeft("20px")
+            ).width().height(),
+            VStack({ alignment: cLeading })(
+                UIButton(
+                    Text("View all chapters >").fontWeight(500).fontSize(15).marginLeft("20px")
+
+                ).marginBottom("10px").marginTop("20px")
+            ).width().height()
+        ).background(Color.purple900).height(150).width(200).cornerRadius("10px 0 0 10px"),
+
+        VStack({ alignment: cLeading, spacing: 20 })(
+            VStack({ alignment: cLeading })(
+                Text("CHAPTER 4").foregroundColor("gray").fontWeight(500).marginLeft("40px")
+            ).width().height(),
+            VStack({ alignment: cLeading })(
+                Text("Callback & Closures").foregroundColor("black").fontWeight(500).marginLeft("40px").fontSize(20)
+            ).width().height(),
+            VStack({ alignment: cLeading })(
+                UIButton(
+                    Text("Continue").foregroundColor("white")
+                ).background(Color.purple900).cornerRadius(500).width(100).height(30).shadow("rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px").marginLeft("300px")
+            ).width().height()
+
+        ).height(150).width(450).background(Color.white).cornerRadius("0 10px 10px 0")
+
+
+
+
+    ).shadow("rgba(0, 0, 0, 0.24) 0px 3px 8px")
+
+).background(Color.purple300)
